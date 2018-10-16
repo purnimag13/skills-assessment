@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Grocery Store</title>
+</head>
+<script>
+    function addToCart(id, price) {
+        var list = document.createElement("p");
+        var listprice = document.createElement("p");
+        var text = document.createTextNode(" for $");
+        var item = document.createTextNode(document.getElementById(id).innerText);
+        var price = document.createTextNode(document.getElementById(price).innerText);
+        list.appendChild(item);
+        list.appendChild(text);
+        listprice.appendChild(price);
+        listprice.setAttribute("name", "item");
+        document.getElementById("myCart").appendChild(list).appendChild(listprice);
+        getTotal();
+    }
+
+    function getTotal() {
+        var i = 0;
+        var x = document.getElementsByName("item");
+        var total = 0;
+        for (i=0; i < x.length; i++)
+        {
+            console.log(parseFloat(x[i].innerText));
+            var price = parseFloat(x[i].innerText);
+            total = total + price;
+        }
+        var e = document.getElementById("totalCost");
+        e.parentNode.removeChild(e);
+        var strong = document.createElement("strong");
+        strong.setAttribute("id", "totalCost");
+        var text = document.createTextNode(total);
+        strong.appendChild(text);
+        document.getElementById("total").appendChild(strong);
+    }
+</script>
+
+<body>
+    <h1 align="center">Blue Harvest Grocery Store</h1>
+    <h3>Items For Sale</h3>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Price ($)</th>
+            <th>Add to Cart</th>
+        </tr>
+        <tr>
+            <td id="item1">Banana</td>
+            <td id="price1">1.25</td>
+            <td><button onclick="addToCart('item1', 'price1')">+</button></td>
+        </tr>
+        <tr>
+            <td id="item2">Corn</td>
+            <td id="price2">1.00</td>
+        </tr>
+        <tr>
+            <td id="item3">Asparagus</td>
+            <td id="price3">3.50</td>
+        </tr>
+    </table>
+    <h3>Your Cart</h3>
+    <ul id="myCart">
+
+    </ul>
+    <p><strong>Total: </strong></p> <p id="total"><strong id="totalCost">$0.00</strong></p>
+</body>
+
+</html>
